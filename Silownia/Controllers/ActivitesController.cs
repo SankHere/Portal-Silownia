@@ -184,12 +184,7 @@ namespace Silownia.Controllers
         {
             if (ModelState.IsValid)
             {
-                /*if(activites.Godzina > 8 && activites.Godzina < 20)
-                {
-                    ModelState.AddModelError(string.Empty, "Godzina musi być 8-19");
-                    ViewBag.TrainingRoomID = new SelectList(db.TrainingRoom, "ID", "Name");
-                    return View("Create");
-                }*/
+              
                 var prof = db.Profiles.Where(n => n.UserName == User.Identity.Name);
 
                 Profile profile = null;
@@ -269,7 +264,7 @@ namespace Silownia.Controllers
             {
                 actProf.Add(item);
             }
-
+            
             foreach (var item in actProf)
             {
                 db.Activites_Profile.Remove(item);
