@@ -1,0 +1,66 @@
+﻿@model Silownia.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Rejestracja";
+}
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+        @Html.AntiForgeryToken()
+        <h4>Stwórz nowe konto.</h4>
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Email", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Hasło", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Powtórz hasło", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            @Html.Label("Imie", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBox("Name")
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Nazwisko", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBox("Surname")
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Miasto", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBox("City")
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Numer telefonu:", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                <input type="tel" name="Number" id="Number"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Rejestruj" />
+            </div>
+        </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="https://code.jquery.com/jquery-1.6.4.js"
+            integrity="sha256-VJZPi1gK15WpYvsnBmcV0yga4a0Toov4rt1diFnrrjc="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Siłownia", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+               
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <!-- malpaif (Request.IsAuthenticated) !-->
+                    <li>@Html.ActionLink("Zajęcia", "Index", "Activites")</li>
+                    @if (Context.User.IsInRole("User") || Context.User.IsInRole("Coach"))
+                    {
+                        <li>@Html.ActionLink("Moje zajęcia", "MyActivites", "Activites", null, null)</li>
+                    }
+                    <li>@Html.ActionLink("Karnety", "Index", "Passes")</li> 
+                   
+                    @if (Context.User.IsInRole("User")) 
+                    {
+                       <li>@Html.ActionLink("Koszyk", "Index", "Basket", new { id = 0}, null) </li>
+                    }
+                    @if (Context.User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Panel administratora", "Index", "FulFillOrder")</li>
+                    }
+                    @if (Context.User.IsInRole("User"))
+                    {
+                        <li>@Html.ActionLink("Moje zamówienia", "UserOrder", "FulFillOrder")</li>
+                    }
+                    @if (Context.User.IsInRole("User"))
+                    {
+                        <li>@Html.ActionLink("Dieta", "Index", "Diet")</li>
+                    }@if (Request.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Chat", "Chat", "Home")</li>
+                    }
+                    <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
+
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

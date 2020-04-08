@@ -1,0 +1,153 @@
+﻿@model IEnumerable<Silownia.Models.Activites>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Wykaz aktualnie prowadzonyach zajęć</h2>
+
+@if (Context.User.IsInRole("Coach"))
+{
+    @Html.ActionLink("Stwórz nowe zajęcie", "Create", "Activites", null, new { @class = "btn btn-success" })
+}
+
+<br />
+<br />
+
+<table class="table" border="solid 1 black">
+    <tr>
+        <th>
+            Godzina
+        </th>
+        <th>
+            Poniedziałek
+        </th>
+        <th>
+            Wtorek
+        </th>
+        <th>
+            Środa
+        </th>
+        <th>
+            Czwartek
+        </th>
+        <th>
+            Piątek
+        </th>
+        <th>
+            Sobota
+        </th>
+        <th>
+            Niedziela
+        </th>
+    </tr>
+
+    @for (int a = 8; a < 20; a++)
+    {
+        <tr>
+            <td>
+                @a - @(a+1)
+            </td>
+            <td style="height:150px; width: 180px;">
+                @foreach (var item in Model)
+                {
+                    if (item.Day == Silownia.Models.Day.Poniedziałek && item.Godzina.Equals(a))
+                    {
+                        @Html.DisplayName("Nazwa: ")
+                        @Html.DisplayFor(modelItem => item.Name) <br />
+                        @Html.DisplayName("Liczba wolnych miejsc: ") 
+                        @Html.DisplayFor(modelItem => item.NumberPlaces) <br />
+                      
+                        @Html.ActionLink("Szczegóły", "Details", "Activites", new { id = item.ID }, new { @class = "btn btn-info"})
+                    }
+                }
+            </td>
+            <td style="height:150px; width: 180px;">
+                @foreach (var item in Model)
+                {
+                    if (item.Day == Silownia.Models.Day.Wtorek && item.Godzina.Equals(a))
+                    {
+                        @Html.DisplayName("Nazwa: ")
+                        @Html.DisplayFor(modelItem => item.Name) <br />
+                        @Html.DisplayName("Liczba wolnych miejsc: ")
+                        @Html.DisplayFor(modelItem => item.NumberPlaces) <br />
+
+                       
+                        @Html.ActionLink("Szczegóły", "Details", "Activites", new { id = item.ID }, new { @class = "btn btn-info" })
+                    }
+                }
+            </td>
+            <td style="height:150px; width: 180px;">
+                @foreach (var item in Model)
+                {
+                    if (item.Day == Silownia.Models.Day.Środa && item.Godzina.Equals(a))
+                    {
+                        @Html.DisplayName("Nazwa: ")
+                        @Html.DisplayFor(modelItem => item.Name) <br />
+                        @Html.DisplayName("Liczba wolnych miejsc: ")
+                        @Html.DisplayFor(modelItem => item.NumberPlaces) <br />
+
+                   
+                        @Html.ActionLink("Szczegóły", "Details", "Activites", new { id = item.ID }, new { @class = "btn btn-info" })
+                    }
+                }
+            </td>
+            <td style="height:150px; width: 180px;">
+                @foreach (var item in Model)
+                {
+                    if (item.Day == Silownia.Models.Day.Czwartek && item.Godzina.Equals(a))
+                    {
+                        @Html.DisplayName("Nazwa: ")
+                        @Html.DisplayFor(modelItem => item.Name) <br />
+                        @Html.DisplayName("Liczba wolnych miejsc: ")
+                        @Html.DisplayFor(modelItem => item.NumberPlaces) <br />
+                      
+                        @Html.ActionLink("Szczegóły", "Details", "Activites", new { id = item.ID }, new { @class = "btn btn-info" })
+                    }
+                }
+            </td>
+            <td style="height:150px; width: 180px;">
+                @foreach (var item in Model)
+                {
+                    if (item.Day == Silownia.Models.Day.Piątek && item.Godzina.Equals(a))
+                    {
+                        @Html.DisplayName("Nazwa: ")
+                        @Html.DisplayFor(modelItem => item.Name) <br />
+                        @Html.DisplayName("Liczba wolnych miejsc: ")
+                        @Html.DisplayFor(modelItem => item.NumberPlaces) <br />
+                       
+                        @Html.ActionLink("Szczegóły", "Details", "Activites", new { id = item.ID }, new { @class = "btn btn-info" })
+                    }
+                }
+            </td>
+            <td style="height:150px; width: 180px;">
+                @foreach (var item in Model)
+                {
+                    if (item.Day == Silownia.Models.Day.Sobota && item.Godzina.Equals(a))
+                    {
+                        @Html.DisplayName("Nazwa: ")
+                        @Html.DisplayFor(modelItem => item.Name) <br />
+                        @Html.DisplayName("Liczba wolnych miejsc: ")
+                        @Html.DisplayFor(modelItem => item.NumberPlaces) <br />
+                    
+                        @Html.ActionLink("Szczegóły", "Details", "Activites", new { id = item.ID }, new { @class = "btn btn-info" })
+                    }
+                }
+            </td>
+            <td style="height:150px; width: 180px;">
+                @foreach (var item in Model)
+                {
+                    if (item.Day == Silownia.Models.Day.Niedziela && item.Godzina.Equals(a))
+                    {                          
+                        @Html.DisplayName("Nazwa: ")
+                        @Html.DisplayFor(modelItem => item.Name) <br />
+                        @Html.DisplayName("Liczba wolnych miejsc: ")
+                        @Html.DisplayFor(modelItem => item.NumberPlaces) <br />
+    
+                        @Html.ActionLink("Szczegóły", "Details", "Activites", new { id = item.ID }, new { @class = "btn btn-info" })
+                    }
+                }
+            </td>
+        </tr>
+    }
+</table>

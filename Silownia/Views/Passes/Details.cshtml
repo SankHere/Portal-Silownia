@@ -1,0 +1,45 @@
+﻿@model Silownia.Models.Pass
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Pass</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+    </dl>
+</div>
+<p>
+@if (Context.User.IsInRole("Admin"))
+{
+    @Html.ActionLink("Edytuj", "Edit", "Passes", new { id = Model.ID }, new { @class = "btn btn-warning"}) 
+}
+    @Html.ActionLink("Wróc", "Index", "Passes", null, new { @class = "btn btn-info"})
+</p>

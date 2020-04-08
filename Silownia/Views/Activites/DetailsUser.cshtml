@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Silownia.Models.Activites_Profile>
+
+@{
+    ViewBag.Title = "Użytkownicy";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+
+    <tr>
+        <th>
+            @Html.Label("Numer")
+        </th>
+        <th>
+            @Html.Label("Nazwa")
+        </th>
+        <th>
+            @Html.Label("Liczba dni karnetu")
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Profile.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Profile.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Profile.DayOfPass)
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+<p>
+    @Html.ActionLink("Wroc", "MyActivites", "Activites", null, new { @class = "btn btn-info" })
+</p>

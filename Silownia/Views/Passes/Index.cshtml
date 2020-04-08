@@ -1,0 +1,81 @@
+﻿@model PagedList.IPagedList<Silownia.Models.Pass>
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Karnety</h2>
+@if (Context.User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Dodaj nowy", "Create", "Passes", null, new { @class = "btn btn-success"} )
+    </p>
+}
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<table class="table">
+
+    <tr>
+        <th>
+            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Time", "Index", new { sortOrder = ViewBag.TimeSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.Label("Zdjęcie")
+        </th>
+        <th>
+            @Html.Label("Szczegóły")
+        </th>
+    </tr>
+
+    
+    
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            <img src="~/Photo/@item.Photo" alt="brak zdjecia" height="50px" width="50px" />
+        </td>
+        <td>
+            @if (Context.User.IsInRole("Admin")) { @Html.ActionLink("Edytuj", "Edit", "Passes", new { id = item.ID }, new { @class = "btn btn-warning" }) } 
+            @Html.ActionLink("Szczegóły", "Details", "Passes", new { id = item.ID }, new { @class = "btn btn-info"}) 
+            @if (Context.User.IsInRole("Admin")) { @Html.ActionLink("Usuń", "Delete", "Passes", new { id = item.ID }, new { @class = "btn btn-danger" } )}
+           
+                @if (Context.User.IsInRole("User"))
+                {
+                    @Html.ActionLink("Dodaj do koszyka", "Index", "Basket", new { id = item.ID }, new { @class = "btn btn-success" }) 
+                }
+            
+        </td>
+    </tr>
+}
+ 
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

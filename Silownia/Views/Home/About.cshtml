@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Silownia.ViewModels.TimeDataGroup>
+
+@{
+    ViewBag.Title = "Pass by stat";
+}
+
+<h2>Statystyki karnetów</h2>
+
+<table>
+    <tr>
+        <th>
+            Time
+        </th>
+        <th>
+            PassCount
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @item.PassCount
+            </td>
+        </tr>
+    }
+</table>

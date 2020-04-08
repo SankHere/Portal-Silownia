@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "CreateDiet";
+}
+
+<h2>Generowanie diety</h2>
+
+<form action="~/Diet/GenerateDiet" method="post">
+    @Html.AntiForgeryToken()
+    <h4>Podaj dane.</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.Label("Podaj swój wzrost: ", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            <input type="number" id="growth" name="growth" value="180" min="30" max="301">
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Podaj swoją wagę: ", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            <input type="number" id="weight" name="weight" value="90" min="20" max="250">
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Podaj swój wiek: ", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            <input type="number" id="age" name="age" value="22" min="8" max="90">
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Podaj ile dań(na dzień): ", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            <input type="number" id="dish" name="dish" value="5" min="2" max="5">
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Dieta na: ", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownList("diet",
+                    new SelectList(
+                        new List<SelectListItem> {
+                            new SelectListItem { Text = "Mase", Value="Masa".ToString()},
+                            new SelectListItem { Text = "Odchudzanie", Value = "Odchudzanie".ToString()}
+                        },
+                        "Value", "Text"),
+                    new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Wybierz płeć", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownList("gender",
+                    new SelectList(
+                        new List<SelectListItem> {
+                            new SelectListItem { Text = "Mężczyzna", Value="M".ToString() },
+                            new SelectListItem { Text = "Kobieta", Value = "K".ToString() }
+                        },
+                        "Value", "Text"),
+                    new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Wygeneruj diete" />
+        </div>
+    </div>
+</form>

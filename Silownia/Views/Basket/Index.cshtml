@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Silownia.Models.Pass>
+@{
+    ViewBag.Title = "Index";
+    var timeAll = 0;
+    var priceAll = 0.0;
+}
+
+<h2>Twój koszyk</h2>
+
+<table class="table">
+
+    <tr>
+        <th>
+            @Html.Label("Nazwa")
+        </th>
+        <th>
+            @Html.Label("Czas trwania")
+        </th>
+        <th>
+            @Html.Label("Cena")
+        </th>
+        <th>
+            Opcje
+        </th>
+    </tr>
+   
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time) dni
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price) zł
+            </td>
+            <td>
+                @Html.ActionLink("Usuń", "Delete", "Basket", new { id = @item.ID}, new { @class = "btn btn-danger" })  
+            </td>
+         
+        </tr>
+        timeAll = timeAll + item.Time;
+        priceAll = priceAll + item.Price;
+
+    }
+        
+</table>
+<div style="float:right;">
+    <b>Czas trwania razem: </b>@timeAll dni<br />
+    <b>Całkowity koszt: </b>@priceAll zł
+</div>
+<div style="clear:both;"></div>
+<div style="float:right";> @Html.ActionLink("Złóż zamówienie", "DoOrder", "Basket", new { @class="btn btn-success"}) </div> 
+<div style="clear: both;"></div>

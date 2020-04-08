@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Silownia.Models.Dish_Profile>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Twoja aktualna dieta</h2>
+
+<table class="table">
+
+    <tr>
+        <td>
+            @Html.Label("Pora jedzenia")
+        </td>
+        <th>
+            @Html.Label("Nazwa jedzenia")
+        </th>
+        <th>
+            @Html.Label("Ilość kalori")
+        </th>
+        <th>
+            @Html.Label("Ilość białka")
+        </th>
+        <th>
+            @Html.Label("Ilość węglowodanów")
+        </th>
+    </tr>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dish.EatingTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dish.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dish.Calories) kcal
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dish.Protein) g
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dish.Carbohydrates) g
+            </td>
+
+        </tr>
+
+    }
+
+</table>
+
+<span style="float: right;"><h3>Podsumowanie: </h3> @ViewBag.Calories kcal kalorii, @ViewBag.Protein g białka, @ViewBag.Carbohudrates g węglowodanów </span>
+
+
+@Html.ActionLink("Wygeneruj nową dietę", "CreateDiet", "Diet", new { @class = "btn btn-info" })  

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Silownia.Models.Order>
+@{
+    ViewBag.Title = "UserOrder";
+}
+
+<h2>Twoje zamówienia</h2>
+
+<table class="table">
+
+    <tr>
+        <td>
+            @Html.Label("Numer zamówienia")
+        </td>
+        <th>
+            @Html.Label("Data złożenia zamówienia")
+        </th>
+        <th>
+            @Html.Label("Cena całego zamówienia")
+        </th>
+        <th>
+            @Html.Label("Status")
+        </th>
+        <th>
+            @Html.Label("Szczegóły")
+        </th>
+    </tr>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data_Order)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price) zł
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Pokaż szczegóły", "Details", "FulFillOrder", new { id = @item.ID }, new { @class = "btn btn-info" })
+            </td>
+
+        </tr>
+
+    }
+  
+</table>
+
+
+

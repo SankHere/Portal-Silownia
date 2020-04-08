@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Silownia.Models.Order_Pass>
+@{
+    ViewBag.Title = "Details";
+}
+<h2>Faktura za zamówienie</h2>
+<h4>Dane o użytkowniku:</h4>
+<dl style="float: inherit;">
+    <dt>
+        @Html.DisplayNameFor(model => model.Order.Profile.UserName):
+    </dt>
+    <dd>
+        @ViewBag.NameUser
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Order.Profile.DayOfPass):
+
+    </dt>
+    <dd>
+        @ViewBag.DaysOfPass
+    </dd>
+</dl>
+<hr />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.Label("Nazwa")
+        </th>
+        <th>
+            @Html.Label("Czas")
+        </th>
+        <th>
+            @Html.Label("Cena")
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pass.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pass.Time) dni
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pass.Price) zł
+            </td>
+        </tr>
+    }
+</table>
